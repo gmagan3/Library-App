@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style type="text/css">
+    table {border-spacing:0}
+    td {border:2px groove black; padding:7px; background-color:#ccffcc}
+    th {border:2px groove black; padding:7px; background-color:#ffffcc}
+    .ctr {text-align:center}
+</style>
+</head>
+<body onload="render('librarydata')">
+<table id="library">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Pages</th>
+            <th>Read</th>
+        </tr>
+    </thead>
+    <tbody id="librarydata"></tbody>
+</table>  
+</body>
+</html>
+
+<script>
+// Establishes the empty array
+myLibrary = []
+// Builds the constructor to store all the required fields
+function Book(title,author,pages,read){
+    this.title = title
+    this.pages = pages
+    this.author = author
+    this.read = read 
+    this.info = function() {
+        return this.title + this.pages + this.read;
+    };
+}
+// function that pushes the variables into the empty array 
+function addBookToLibrary(book, library) {
+    library.push(book)
+  }
+
+const hobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 351, true)
+const harryPotter = new Book('Harry Potter', 'J.K. Rowling', 385, true)
+const codingInterview = new Book('Cracking the Coding Interview', 'Gayle McDowell', 692, false)
+
+//Adds dataset to the table
+addBookToLibrary(hobbit, myLibrary)
+addBookToLibrary(harryPotter, myLibrary)
+addBookToLibrary(codingInterview, myLibrary)
+//transaltes the data into the HTML table 
+    function render(tbody){
+        var tr , td;
+        tbody = document.getElementById(tbody);
+        for (var i = 0; i < myLibrary.length; i++){
+            tr = tbody.insertRow(tbody.rows.length);
+            td = tr.insertCell(tr.cells.length);
+            td.setAttribute("align","center");
+            td.innerHTML = myLibrary[i].title;
+            td = tr.insertCell(tr.cells.length);
+            td.innerHTML = myLibrary[i].pages;
+            td = tr.insertCell(tr.cells.length);
+            td.innerHTML = myLibrary[i].read;
+        }
+    }
+
+</script>
